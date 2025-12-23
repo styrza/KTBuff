@@ -3,10 +3,10 @@ print("KTBuff: Initializing...")
 
 local frame = CreateFrame("Frame")
 
-local buffTextures = {
-    ["Interface\\Icons\\INV_Potion_62"] = "Flask of the Titans",
-    ["Interface\\Icons\\INV_Drink_04"] = "Medivh's Merlot",
-    ["Interface\\Icons\\INV_Potion_44"] = "Elixir of Fortitude"
+local buffList = {
+    [17626] = "Flask of the Titans",      
+    [57106] = "Medivh's Merlot",          
+    [3593] = "Elixir of Fortitude"        
 }
 
 local phase2Yells = {
@@ -31,10 +31,11 @@ frame:SetScript("OnEvent", function(self, event, arg1)
                         
                         local removed = 0
                         for i = 1, 40 do
+
                             local texture, stacks, spellId = UnitBuff("player", i)
-                            if texture and buffTextures[texture] then
+                            if spellId and buffList[spellId] then
                                 CancelUnitBuff("player", i)
-                                print("KTBuff: Removed " .. buffTextures[texture])
+                                print("KTBuff: Removed " .. buffList[spellId])
                                 removed = removed + 1
                             end
                         end
