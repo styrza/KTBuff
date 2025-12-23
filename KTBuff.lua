@@ -15,7 +15,7 @@ local phase2Yells = {
     "The end is upon you!"
 }
 
-frame:SetScript("OnEvent", function(self, event, arg1)
+frame:SetScript("OnEvent",  function ()
     if event == "PLAYER_LOGIN" then
         print("KTBuff loaded. Waiting for phase transition...")
         
@@ -30,15 +30,16 @@ frame:SetScript("OnEvent", function(self, event, arg1)
                         print("KTBuff: Phase 2 detected - removing buffs")
                         
                         local removed = 0
-                        for i = 1, 40 do
-
-                            local texture, stacks, spellId = UnitBuff("player", i)
+                        for i = 32, 0, -1 do
+							local buffIndex = GetPlayerBuff(i, "HELPFUL")
+							local spellId = GetPlayerBuffID(buffIndex)
                             if spellId and buffList[spellId] then
-                                CancelUnitBuff("player", i)
+                                CancelPlayerBuff(buffIndex)
                                 print("KTBuff: Removed " .. buffList[spellId])
                                 removed = removed + 1
                             end
                         end
+
                         
                         if removed > 0 then
                             print("KTBuff: Removed " .. removed .. " buff(s)")
