@@ -1,12 +1,12 @@
--- KTBuff Addon
+-- KTBuff Addon for WoW 1.12
 print("KTBuff: Initializing...")
 
 local frame = CreateFrame("Frame")
 
-local buffList = {
-    ["Flask of the Titans"] = true,
-    ["Medivh's Merlot"] = true,
-    ["Elixir of Fortitude"] = true
+local buffTextures = {
+    ["Interface\\Icons\\INV_Potion_62"] = "Flask of the Titans",
+    ["Interface\\Icons\\INV_Drink_04"] = "Medivh's Merlot",
+    ["Interface\\Icons\\INV_Potion_44"] = "Elixir of Fortitude"
 }
 
 local phase2Yells = {
@@ -31,10 +31,10 @@ frame:SetScript("OnEvent", function(self, event, arg1)
                         
                         local removed = 0
                         for i = 1, 40 do
-                            local buffName = UnitBuff("player", i)
-                            if buffName and buffList[buffName] then
+                            local texture, stacks, spellId = UnitBuff("player", i)
+                            if texture and buffTextures[texture] then
                                 CancelUnitBuff("player", i)
-                                print("KTBuff: Removed " .. buffName)
+                                print("KTBuff: Removed " .. buffTextures[texture])
                                 removed = removed + 1
                             end
                         end
