@@ -1,0 +1,8 @@
+## Interface: 100200
+## Title: KTBuff
+## Notes: Removes health increasing consumes (exception of PW: Fortitude and Prayer of Fortitude) as Kel'Thuzad reaches phase 2
+## Author: Styr
+## Version: 1.0.0
+## SavedVariables: KTBuffDB
+
+KTBuff.lua
